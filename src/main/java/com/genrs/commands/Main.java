@@ -2,6 +2,7 @@ package com.genrs.commands;
 
 import com.genrs.commands.command.CommandFactory;
 import com.genrs.commands.model.User;
+import com.genrs.commands.skill.SkillManager;
 
 import java.io.IOException;
 import java.io.InputStream;

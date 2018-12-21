@@ -37,6 +37,15 @@ public class SkillManager {
         return map;
     }
 
+    public static Integer getExperienceForLevel(Integer level) {
+        if (level <= 1) return 0;
+        int a = level - 1;
+        double b = 300;
+        double c = Math.pow(2, a/7.0);
+        int val = (int) Math.floor(( a + (b * c))/4);
+        return getExperienceForLevel(level - 1) + val;
+    }
+
     @Override
     public String toString() {
         return "SkillManager{" +

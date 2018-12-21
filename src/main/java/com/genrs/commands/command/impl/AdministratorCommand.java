@@ -3,6 +3,7 @@ package com.genrs.commands.command.impl;
 import com.genrs.commands.command.Command;
 import com.genrs.commands.model.Role;
 import com.genrs.commands.model.User;
+import com.genrs.commands.skill.SkillManager;
 import com.genrs.commands.skill.SkillName;
 
 import java.util.HashMap;
@@ -96,9 +97,10 @@ public class AdministratorCommand implements Command {
                     user.getSkillManager().getSkill(skill)
                             .setLevel(level)
                             .setCurrentLevel(level)
-                            .setExperience(1209);
+                            .setExperience(SkillManager.getExperienceForLevel(level));
 
-                    logger.info(user.getUsername() + "'s " + skill + " level is now set to " + level + ".");
+                    logger.info(user.getUsername() + "'s " + skill + " level is now set to " + level + " with" +
+                            " experience of " + user.getSkillManager().getSkill(skill).getExperience() + ".");
                 }));
             }
         };
