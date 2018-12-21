@@ -1,12 +1,13 @@
 package com.genrs.commands.command.impl;
 
 import com.genrs.commands.command.Command;
-import com.genrs.commands.model.Role;
 import com.genrs.commands.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import static com.genrs.commands.model.Role.USER;
 
 public class UserCommand implements Command {
 
@@ -14,7 +15,7 @@ public class UserCommand implements Command {
     private static final Logger logger = Logger.getLogger(UserCommand.class.getName());
 
     public void authorizeExecution(User user, String [] args) {
-        if (user.getRole().getValue() >= Role.USER.getValue()) this.execute(user, args);
+        if (user.authorized(USER)) this.execute(user, args);
         else System.out.println(user.getUsername() + " does not have sufficient authorization to use command.");
     }
 
@@ -22,7 +23,7 @@ public class UserCommand implements Command {
         this.command = null;
     }
 
-    private UserCommand(Command command) {
+    public UserCommand(Command command) {
         this.command = command;
     }
 
@@ -34,6 +35,7 @@ public class UserCommand implements Command {
     public static Map<String, Command> commands() {
         return new HashMap<String, Command>() {
             {
+
                 put("change-name", new UserCommand((user, values) -> {
                     if (values.length != 1) {
                         logger.warning("Argument amount mismatch. Need: 1, Received: " + values.length);
@@ -43,6 +45,7 @@ public class UserCommand implements Command {
                         user.setUsername(username);
                     }
                 }));
+
                 put("no-args", new UserCommand((user, values) -> {
                     logger.info("values.length should be 0, values.length: " + values.length);
                 }));

@@ -51,4 +51,8 @@ public class User {
         this.role = Role.USER;
         this.skillManager = new SkillManager();
     }
+
+    public boolean authorized(Role required) {
+        return role.getValue() >= required.getValue();
+    }
 }

@@ -1,13 +1,14 @@
 package com.genrs.commands.command.impl;
 
 import com.genrs.commands.command.Command;
-import com.genrs.commands.model.Role;
 import com.genrs.commands.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import static com.genrs.commands.model.Role.DEVELOPER;
 
 public class DeveloperCommand implements Command {
 
@@ -22,7 +23,7 @@ public class DeveloperCommand implements Command {
     }
 
     public void authorizeExecution(User user, String [] args) {
-        if (user.getRole().getValue() >= Role.DEVELOPER.getValue()) this.execute(user, args);
+        if (user.authorized(DEVELOPER)) this.execute(user, args);
         else System.out.println(user.getUsername() + " does not have sufficient authorization to use command.");
     }
 

@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import static com.genrs.commands.Main.ITEM_COUNT;
+import static com.genrs.commands.model.Role.ADMINISTRATOR;
 
 public class AdministratorCommand implements Command {
 
@@ -26,7 +27,7 @@ public class AdministratorCommand implements Command {
     }
 
     public void authorizeExecution(User user, String [] args) {
-        if (user.getRole().getValue() >= Role.ADMINISTRATOR.getValue()) this.execute(user, args);
+        if (user.authorized(ADMINISTRATOR)) this.execute(user, args);
         else System.out.println(user.getUsername() + " does not have sufficient authorization to use command.");
     }
 

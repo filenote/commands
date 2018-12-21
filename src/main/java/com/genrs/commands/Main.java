@@ -1,13 +1,13 @@
 package com.genrs.commands;
 
 import com.genrs.commands.command.CommandFactory;
+import com.genrs.commands.command.impl.AdministratorCommand;
+import com.genrs.commands.command.impl.UserCommand;
 import com.genrs.commands.model.User;
-import com.genrs.commands.skill.SkillManager;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import static com.genrs.commands.model.Role.*;
 
@@ -20,8 +20,6 @@ public class Main {
                 .getResourceAsStream("logging.properties");
         try {
             LogManager.getLogManager().readConfiguration(stream);
-            Logger logger = Logger.getLogger(Main.class.getName());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,6 +56,18 @@ public class Main {
         commandFactory.execute(moderator, "set-level strength 20");
         commandFactory.execute(administrator, "set=level strength 20");
         commandFactory.execute(administrator, "set-level stre");
+
+        System.out.println("User Commands");
+        commandFactory.execute(user, "commands");
+
+        System.out.println("Moderator Commands");
+        commandFactory.execute(moderator, "commands");
+
+        System.out.println("Administrator Commands");
+        commandFactory.execute(administrator, "commands");
+
+        System.out.println("Developer Commands");
+        commandFactory.execute(developer, "commands");
     }
 
 }
