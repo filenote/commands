@@ -1,42 +1,23 @@
 package com.genrs.commands.command.impl;
 
+import com.genrs.commands.command.AuthorizedCommand;
 import com.genrs.commands.command.Command;
-import com.genrs.commands.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Logger;
 
 import static com.genrs.commands.model.Role.DEVELOPER;
 
-public class DeveloperCommand implements Command {
+public class DeveloperCommand extends AuthorizedCommand {
 
-    private final Command command;
-    private static final Logger logger = Logger.getLogger(DeveloperCommand.class.getName());
-
-    private DeveloperCommand() {
-        this.command = null;
-    }
     private DeveloperCommand(Command command) {
-        this.command = command;
+        super(command, DEVELOPER);
     }
 
-    public void authorizeExecution(User user, String [] args) {
-        if (user.authorized(DEVELOPER)) this.execute(user, args);
-        else System.out.println(user.getUsername() + " does not have sufficient authorization to use command.");
-    }
-
-    @Override
-    public void execute(User user, String... args) {
-        Objects.requireNonNull(command).execute(user, args);
-    }
-
-    public static Map<String, Command> commands() {
-        return new HashMap<String, Command>() {
+    public static Map<String, AuthorizedCommand> commands() {
+        return new HashMap<String, AuthorizedCommand>() {
             {
-                put("d", new DeveloperCommand((user, args) ->
-                        System.out.println("This is a command in the DeveloperCommand class.")));
+
             }
         };
     }

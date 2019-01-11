@@ -1,6 +1,6 @@
-package com.genrs.commands.skill;
+package com.genrs.commands.content.skill;
 
-public enum SkillName {
+public enum Skill {
      ATTACK,
      DEFENCE,
      STRENGTH,

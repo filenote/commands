@@ -1,12 +1,14 @@
-package com.genrs.commands.skill;
+package com.genrs.commands.content.skill.skillable;
+
+import com.genrs.commands.content.skill.Skill;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Skill {
+public class SkillDetails {
 
     private UUID id;
-    private SkillName name;
+    private Skill name;
     private Integer level;
     private Integer currentLevel;
     private Integer experience;
@@ -15,16 +17,16 @@ public class Skill {
         return id;
     }
 
-    public Skill setId(UUID id) {
+    public SkillDetails setId(UUID id) {
         this.id = id;
         return this;
     }
 
-    public SkillName getName() {
+    public Skill getName() {
         return name;
     }
 
-    public Skill setName(SkillName name) {
+    public SkillDetails setName(Skill name) {
         this.name = name;
         return this;
     }
@@ -33,7 +35,7 @@ public class Skill {
         return level;
     }
 
-    public Skill setLevel(Integer level) {
+    public SkillDetails setLevel(Integer level) {
         this.level = level;
         return this;
     }
@@ -42,8 +44,13 @@ public class Skill {
         return currentLevel;
     }
 
-    public Skill setCurrentLevel(Integer currentLevel) {
+    public SkillDetails setCurrentLevel(Integer currentLevel) {
         this.currentLevel = currentLevel;
+        return this;
+    }
+
+    public SkillDetails addToCurrentLevel(Integer amount) {
+        this.currentLevel = this.currentLevel + amount;
         return this;
     }
 
@@ -51,12 +58,12 @@ public class Skill {
         return experience;
     }
 
-    public Skill setExperience(Integer experience) {
+    public SkillDetails setExperience(Integer experience) {
         this.experience = experience;
         return this;
     }
 
-    public Skill(UUID id, SkillName name, Integer level, Integer currentLevel, Integer experience) {
+    public SkillDetails(UUID id, Skill name, Integer level, Integer currentLevel, Integer experience) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -66,7 +73,7 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill{" +
+        return "SkillDetails{" +
                 "id=" + id +
                 ", name=" + name +
                 ", level=" + level +
@@ -78,13 +85,13 @@ public class Skill {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Skill)) return false;
-        Skill skill = (Skill) o;
-        return Objects.equals(getId(), skill.getId()) &&
-                getName() == skill.getName() &&
-                Objects.equals(getLevel(), skill.getLevel()) &&
-                Objects.equals(getCurrentLevel(), skill.getCurrentLevel()) &&
-                Objects.equals(getExperience(), skill.getExperience());
+        if (!(o instanceof SkillDetails)) return false;
+        SkillDetails skillDetails = (SkillDetails) o;
+        return Objects.equals(getId(), skillDetails.getId()) &&
+                getName() == skillDetails.getName() &&
+                Objects.equals(getLevel(), skillDetails.getLevel()) &&
+                Objects.equals(getCurrentLevel(), skillDetails.getCurrentLevel()) &&
+                Objects.equals(getExperience(), skillDetails.getExperience());
     }
 
     @Override
